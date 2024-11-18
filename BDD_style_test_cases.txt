@@ -1,0 +1,119 @@
+BDD-style test cases are as follows as:
+
+Feature: Compose and send email in Gmail
+---------------------------------------------------------------
+
+Scenario: Open the compose email window
+
+Given the user is logged into Gmail
+When the user clicks on the "Compose" button
+Then a new email compose window should open.
+---------------------------------------------------------------
+
+Scenario: Enter subject in the compose window
+
+Given the compose window is open
+When the user enters "Incubyte" in the subject field
+Then the subject field should display "Incubyte".
+----------------------------------------------------------------
+Scenario: Enter body in the compose window
+
+Given the compose window is open
+When the user enters "QA test for Incubyte" in the email body field
+Then the body should display "QA test for Incubyte".
+----------------------------------------------------------------
+Scenario: Enter recipient email address
+
+Given the compose window is open
+When the user enters "test@example.com" in the "To" field
+Then the "To" field should display "test@example.com".
+------------------------------------------------------------------
+Scenario: Send the email
+
+Given the "To", "Subject", and "Body" fields are filled
+When the user clicks on the "Send" button
+Then the email should be sent successfully to recepient and a confirmation message should appear.
+-------------------------------------------------------------------
+Scenario: Verify sent email content
+
+Given the email has been sent
+When the user navigates to the "Sent" folder
+And opens the sent email
+Then the email should have the subject "Incubyte" and body "QA test for Incubyte".
+-------------------------------------------------------------------
+Scenario: Error message for missing recipient
+
+Given the compose window is open, and the subject and body fields are filled
+When the user clicks on the "Send" button without entering a recipient
+Then an error message should appear, prompting the user to enter a recipient email address.
+---------------------------------------------------------------------
+Scenario: Verify Email Sent Functionality
+
+Given The Compose window is open
+When the user clicks on the "Send" button
+Then An error message is displays "Please specify at least one recipient"
+
+------------------------------------------------------------------------
+
+Feature: Attach files in Gmail Compose
+
+Scenario: Verify the attachment icon
+
+Given the compose window is open
+When the user looks at the toolbar in the compose window
+Then the "Attachment" icon should be visible.
+---------------------------------------------------------------------
+Scenario: Attach a file to the email
+
+Given the compose window is open
+When the user clicks on the "Attachment" icon 
+And selects a valid file
+Then the selected file should be attached and displayed below the email body.
+-------------------------------------------------------------------------
+
+Scenario: Attach multiple files
+
+Given the compose window is open
+When the user attaches multiple files one by one
+Then all attached files should be displayed below the email body.
+---------------------------------------------------------------------------
+Scenario: Handle large file attachment
+
+Given the compose window is open
+When the user tries to attach a file larger than Gmail's size limit
+Then an error message should be displayed, and the file should not be attached.
+--------------------------------------------------------------------------
+
+Scenario: Preview an attached file
+
+Given the compose window is open with a file attached
+When the user clicks on the "Preview" option of the attached file
+Then a preview of the file should open in a separate window.
+-----------------------------------------------------------------------------
+Scenario: Remove an attached file
+
+Given the compose window is open with a file attached
+When the user clicks on the "Remove" or "X" icon next to the file
+Then the file should be removed from the compose window.
+-----------------------------------------------------------------------------
+
+Scenario: Send an email with an attachment
+
+Given the "To", "Subject", and "Body" fields are filled, and a file is attached
+When the user clicks on the "Send" button
+Then the email should be sent successfully, and the recipient should receive the email with the attachment.
+-------------------------------------------------------------------------------
+Scenario: Verify attachment in sent email
+
+Given the email has been sent with an attachment
+When the user opens the email in the "Sent" folder
+Then the attached file should be present and downloadable.
+---------------------------------------------------------------------------
+Scenario: Error message for invalid recipient
+
+Given the user is logged into Gmail
+When the user enters an invalid email address (e.g., invalid@@example) in the "To" field and clicks the "Send" button
+Then an error message should appear, indicating that the email address is invalid.
+
+
+
